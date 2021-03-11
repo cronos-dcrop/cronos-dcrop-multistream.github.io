@@ -1,5 +1,5 @@
 let isControlActive = false;
-// let connected = false;
+let connected = false;
 let isStarted = false;
 let remoteVideo = null;
 let recvonly;
@@ -30,14 +30,6 @@ const startConnection = async () => {
     .connect()
     .then((stream) => {
       console.log("fromIframe >> channelId = " + channelId);
-      // ここがうまくいかない
-      if (remoteVideo == null || remoteVideo.srcObject == null) {
-      }
-      else {
-        console.log("connect");
-        var restartStreamButton = document.getElementById("restartStreamButton");
-        restartStreamButton.style.visibility = "hidden";
-      }
     })
     .catch((e) => {
       console.error(e);
@@ -82,6 +74,7 @@ const startConnection = async () => {
     if (video) {
       document.querySelector('#videoContainer').removeChild(video);
       remoteVideo = null;
+      connected = false;
     }
   });
 
@@ -103,7 +96,7 @@ const reload = () => {
 // ページ読込み完了時
 window.onload = function () {
   startConnection();
-  start();
+  startWorkAsync();
 }
 
 // スリープ
@@ -111,8 +104,8 @@ const sleep = ms => new Promise(resolve =>
   setTimeout(resolve, ms)
 );
 
-// スタート
-const start = async () => {
+// 非同期動作スタート
+const startWorkAsync = async () => {
   if (!isStarted) {
     doWorkAsync();
   }
@@ -125,13 +118,15 @@ async function doWorkAsync() {
   restartStreamButton.style.visibility = "visible";
   while (true) {
     await sleep(2000);
-    // if (!connected) {
-    //   console.log("retrying to connect");
-    //   window.location.reload(1);
-    // }
     if (remoteVideo == null || remoteVideo.srcObject == null) {
       console.log("retrying to connect");
       window.location.reload(1);
+    }
+    else if (!connected) {
+      connected = true;
+      console.log("connect");
+      var restartStreamButton = document.getElementById("restartStreamButton");
+      restartStreamButton.style.visibility = "hidden";
     }
   }
 }
