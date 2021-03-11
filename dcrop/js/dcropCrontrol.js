@@ -28,7 +28,7 @@ dcropController.makeRequest = function (method, url, data) {
                 status: this.status,
                 statusText: xhr.statusText
             });
-            console.error("makeRequest() >> Error");
+            console.error(`makeRequest() >> ${error.type} status:${this.status} statusText:${xhr.statusText}`);
         };
         if (method == "POST" && data) {
             xhr.send(data);
