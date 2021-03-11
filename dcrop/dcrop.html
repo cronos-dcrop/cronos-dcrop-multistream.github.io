@@ -1,0 +1,72 @@
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <!-- CSS Files-->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/Chalarangelo/mini.css/v3.0.1/dist/mini-default.min.css">
+    <link rel="stylesheet" href="./css/dcrop.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/cameraSettingsMenu.css">
+  </head>
+  <body>
+    <div>
+      <input id="channelIdInput" style="display: none;" type="text" value=""></input>
+
+      <div id="videoContainer" style="float:left;"></div>
+
+      <div class="dropup noselect control">
+        <span class="dropbtn" onclick="javascript:switchAdjustmentsMenu();">調整</span>
+        <div id="cameraAdjustmentsMenu" class="dropup-content">
+          <span><i class="minusIcon" onclick="javascript:exposureDown();">-</i><label>露出</label><i class="plusIcon"
+              onclick="javascript:exposureUp();">+</i></span>
+          <span><i class="minusIcon" onclick="javascript:brightnessDown();">-</i><label>明るさ</label><i class="plusIcon"
+              onclick="javascript:brightnessUp();">+</i></span>
+          <span><i class="minusIcon" onclick="javascript:contrastDown();">-</i><label>コントラスト</label><i class="plusIcon"
+              onclick="javascript:contrastUp();">+</i></span>
+        </div>
+      </div>
+  
+      <span id="cameraName" class="cameraName noselect control">
+        カメラ名
+      </span>
+      <span id="aspectControl" class="aspectControl noselect control"
+        onclick="javascript:switchAspect();">
+        <i class="fas fa-compress noselect"></i>
+      </span>
+  
+      <span id="speakerControl" class="speakerControl noselect control"
+        onclick="javascript:muteUnmute();">
+        <i class="fas fa-volume-mute noselect"></i>
+      </span>
+  
+      <span id="disconnectButton" class="disconnectButton noselect control"
+        onclick="javascript:reload();">
+        ページ再読込
+      </span>
+  
+      <span id="restartStreamButton" class="restartStreamButton noselect control"
+        onclick="javascrip:dcropController.restartStream(channelId);">
+        リスタートストリーム
+      </span>
+  
+      <span id="fullScreenControl" class="fullScreenControl noselect control"
+        onclick="javascript:fullScreen();">
+        <i class="fas fa-arrows-alt"></i>
+      </span>
+  
+      <span id="exitFullScreenControl" class="exitFullScreenControl noselect control"
+        onclick="javascript:exitFullScreen();">
+        <i class="fas fa-window-close"></i>
+    </div>
+
+    <!-- JS Files-->
+    <script src="./js/logger/logger.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.7.0/qs.min.js"></script>
+    <script src="./js/sora.js"></script>
+    <script src="./js/sora-info.js"></script>
+    <script src="./js/dcrop.js"></script>
+    <script src="./js/cameraControl.js"></script>
+    <script src="./js/dcropCrontrol.js"></script>
+  </body>
+</html>
